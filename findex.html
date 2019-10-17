@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>XO game</title>
+ <style>
+  .wrapper{
+   width: 400px;
+   height: 400px;
+   margin: 0px;
+   padding: 20px;
+   background-image:url("blood.jpg");
+   border-radius: 10px; 
+  }
+.square{
+   width: 120px;
+   height: 120px;
+   background: black;
+   margin: 5px;
+   font-size: 108px;
+   font-family: fantasy;
+   text-align: center;
+   color:brown;
+   cursor: pointer;
+   float: right;
+   border-radius: 1px;
+  }
+  .B{
+      color:green;
+      font-family: fantasy;
+      float: center;
+      }
+      .scx{
+         color:green;
+         font-family: fantasy;
+         margin: 15px;
+         padding: 10px;
+         float : left;
+      
+      }
+      .sco{
+         color:green;
+         font-family: fantasy;
+         margin: 15px;
+         padding: 10px;
+         float: left;
+      }
+      p{
+         color: green;
+         font-family: fantasy;
+         font-display:none;
+      }   
+       
+  </style>    
+</head>
+<body background="273660.jpg">
+   <h2 class="scx">X score: </h2>
+   <h2 class="sco">O score: </h2>
+   <br>
+   <br>
+   <br>
+   <br>
+
+ <div class="wrapper">
+<div class="square" id="A1" onclick="insert(this.id)"></div>
+  <div class="square" id="A2" onclick="insert(this.id)"></div>
+  <div class="square" id="A3" onclick="insert(this.id)"></div>
+  <div class="square" id="A4" onclick="insert(this.id)"></div>
+  <div class="square" id="A5" onclick="insert(this.id)"></div>
+  <div class="square" id="A6" onclick="insert(this.id)"></div>
+  <div class="square" id="A7" onclick="insert(this.id)"></div>
+  <div class="square" id="A8" onclick="insert(this.id)"></div>
+  <div class="square" id="A9" onclick="insert(this.id)"></div>
+</div>
+<BR>
+<button type="button" class="B" >RESTART</button>
+<br>
+<br>
+<a href="game.html" class="B">BACK</a>
+<script>
+
+let scorex= 0;
+let scoreX = document.querySelector(".scx");
+let scoreo= 0;
+let scoreO = document.querySelector(".sco");
+  var turn = true;
+  var squares = [];
+  function win(G,T,M , we){
+   document.getElementById('A'+G).style.color="Green";
+   document.getElementById('A'+T).style.color="Green";
+   document.getElementById('A'+M).style.color="Green";
+if (we == "X"){
+   
+   scorex ++
+   scoreX.textContent = " X score:" + scorex;
+}
+else{
+scoreo ++
+   scoreO.textContent = " O score:" + scoreo;
+}
+}
+  function checkWinning(){
+   for (var i=1; i<=9; i++) {
+    squares[i] = document.getElementById('A'+i).innerHTML;
+   }
+if (squares[1]==squares[2] && squares[2]==squares[3] && squares[1]!=""){
+    alert('Player ' + squares[1] +' is the winner');
+    win(1,2,3 ,squares[1] );
+
+   }
+   if (squares[4]==squares[5] && squares[5]==squares[6] && squares[4]!=""){
+    alert('Player ' + squares[4] +' is the winner');
+    win(4,5,6, squares[4]);
+  
+   }
+   if (squares[7]==squares[8] && squares[8]==squares[9] && squares[7]!=""){
+    alert('Player ' + squares[7] +' is the winner');
+    win(7,8,9,squares[7]);
+
+   }
+if (squares[1]==squares[4] && squares[4]==squares[7] && squares[1]!=""){
+    alert('Player ' + squares[1] +' is the winner');
+    win(1,4,7,squares[1]);
+
+   }
+   if (squares[2]==squares[5] && squares[5]==squares[8] && squares[2]!=""){
+    alert('Player ' + squares[2] +' is the winner');
+    win(2,5,8,squares[2]);
+   
+   }
+   if (squares[3]==squares[6] && squares[6]==squares[9] && squares[3]!=""){
+    alert('Player ' + squares[3] +' is the winner');
+    win(3,6,9,squares[3]);
+
+   }
+if (squares[1]==squares[5] && squares[5]==squares[9] && squares[1]!=""){
+    alert('Player ' + squares[1] +' is the winner');
+    win(1,5,9,squares[1]);
+  
+   }
+   if (squares[3]==squares[5] && squares[5]==squares[7] && squares[3]!=""){
+    alert('Player ' + squares[3] +' is the winner');
+    win(3,5,7,squares[3]);
+
+   }   
+  }
+function insert(id){
+   var S = document.getElementById(id);
+   if(turn && S.innerHTML==""){
+    S.innerHTML="X";
+    turn = !turn;
+
+   }else if(!turn && S.innerHTML==""){
+    S.innerHTML="O";
+    turn = !turn;
+
+   }
+checkWinning();
+}
+</script>
+</body>
+<footer><font face="fantasy"color="white" size="4"> <p id="date"></p>
+   <script>
+   document.getElementById("date").innerHTML = Date();
+   </script>
+</footer>
+</html>

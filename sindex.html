@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Matching Cards</title>
+  <style>
+body {
+  margin: 0;
+  background-color: black;
+
+}
+p{
+  color:brown;
+  font-family: fantasy;
+}
+.page-title {
+  color: brown;
+  font-family:fantasy;
+  font-weight: normal;
+  text-align: center;
+  font-size: 10px;
+}
+.game-info-container {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-between;
+}
+.game-info {
+  color: brown;
+  font-size: 30px;
+  font-family: fantasy ;
+}
+.game-container {
+  margin: 50px auto;
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  grid-gap: 10px;
+  justify-content: center;
+}
+.card {
+  position: relative;
+  height: 100px;
+  width: 100px;
+  margin: 0px;
+  padding: 0px;
+  border-radius: 20px;
+}
+.card-face {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 1px;
+  border-width: 10px;
+  border-style:groove;
+  overflow: hidden;
+  transition: transform 500ms ease-in-out;
+  backface-visibility: hidden;
+}
+.card.visible .card-back {
+  transform: rotateY(-180deg); 
+}
+.card.visible .card-front {
+  transform: rotateY(0); 
+}
+.card.matched .card-front .card-value {
+  animation: dance 1s linear infinite 500ms;
+}
+.card-back {
+  background-color: brown;
+  border-color: grey;
+  transform: rotateY(0); 
+}
+.card-value {
+  position: relative;
+  transition: transform 100ms ease-in-out;
+  transform: scale(.9);
+}
+.card-front {
+  background-color:white;
+  border-color: #333;
+  transform: rotateY(180deg);
+}
+.overlay-text {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  display: none;
+  position: fixed;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: brown;
+  font-family: fantasy;
+  font-size: 10px;}
+
+.game-over-text , .overlay-text-small ,.overlay-text.visible {
+  display: flex;
+  animation: overlay-grow 5ms forwards;
+  font-family: fantasy;
+  color: brown;
+  size: 10px;}
+  @keyframes dance {
+  0%, 100% {
+    transform: rotate(0)
+  }
+  25% {
+    transform: rotate(-30deg)
+  }
+  75% {
+    transform: rotate(30deg)
+  }
+}
+.B{
+  color: brown;
+  font-family: fantasy;
+}
+@keyframes overlay-grow {
+  from {
+    background-color: rgba(0, 0, 0, 0);
+    font-size: 0;
+  }
+  to {
+    background-color: rgba(0, 0, 0, .8);
+    font-size: 30px;
+    float: left;
+  }
+}
+@media (max-width: 600px) {
+  .game-container ,.game-info-container {
+    grid-template-columns: repeat(2, auto);
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+</style>
+</head>
+<body>
+   
+  <div class="overlay-text visible">
+Press anywhere to start 
+  </div>
+  <div id="game-over-text" class="overlay-text">
+    Game over
+    <span class="overlay-text-small">Press anywhere to Restart</span>
+  </div>
+  <div id="victory-text" class="overlay-text">
+  You are a winner
+    <span class="overlay-text-small">Press anywhere to Restart</span>
+  </div>
+  <div class="game-container">
+    <div class="game-info-container">
+        <div class="game-info">
+            Flips <span id="flips">20</span>
+          </div>
+      <div class="game-info">
+        Time <span id="time-remaining">90</span>
+      </div>
+    </div>
+    <div class="card">
+            <div class="card-back card-face">
+            </div>
+            <div class="card-front card-face">
+<img class="card-value" src="Bat.png">
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-back card-face">
+            </div>
+            <div class="card-front card-face">
+  <img class="card-value" src="Bat.png">
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-back card-face">
+            </div>
+            <div class="card-front card-face">
+ <img class="card-value" src="Bones.png">
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-back card-face">
+            </div>
+            <div class="card-front card-face">
+  <img class="card-value" src="Bones.png">
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-back card-face">
+            </div>
+            <div class="card-front card-face">
+  <img class="card-value" src="Cauldron.png">
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-back card-face">
+            </div>
+            <div class="card-front card-face">
+<img class="card-value" src="Cauldron.png">
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-back card-face">
+            </div>
+            <div class="card-front card-face">
+  <img class="card-value" src="Eye.png">
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-back card-face">
+            </div>
+            <div class="card-front card-face">
+  <img class="card-value" src="Eye.png">
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-back card-face">
+            </div>
+            <div class="card-front card-face">
+   <img class="card-value" src="Skull.png">
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-back card-face">
+            </div>
+            <div class="card-front card-face">
+   <img class="card-value" src="Skull.png">
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-back card-face">
+            </div>
+            <div class="card-front card-face">
+  <img class="card-value" src="Pumpkin.png">
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-back card-face">
+            </div>
+            <div class="card-front card-face">
+  <img class="card-value" src="Pumpkin.png">
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-back card-face">
+            </div>
+            <div class="card-front card-face">
+ <img class="card-value" src="Ghost.png">
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-back card-face">
+            </div>
+            <div class="card-front card-face">
+  <img class="card-value" src="Ghost.png">
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-back card-face">
+            </div>
+            <div class="card-front card-face">
+   <img class="card-value" src="Dracula.png">
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-back card-face">
+           </div>
+            <div class="card-front card-face">
+<img class="card-value" src="Dracula.png">
+            </div>
+          </div>
+        </div>
+        <a href="game.html" class="B">BACK</a>
+  <script>
+class AudioController {
+    constructor() {
+        this.bgMusic = new Audio('CeepyVibes.mp3');
+        this.flipSound = new Audio('Aflip.wav');
+        this.matchSound = new Audio('match.wav');
+        this.victorySound = new Audio('victory.wav');
+        this.gameOverSound = new Audio('gameOver.wav');
+        this.bgMusic.volume = 0.10;
+        this.bgMusic.loop = true;
+    }
+    startMusic() {
+        this.bgMusic.play();
+        this.bgMusic.currentTime = 0;
+    }
+    stopMusic() {
+        this.bgMusic.pause();
+        this.bgMusic.currentTime = 0;
+    }
+    flip() {
+        this.flipSound.play();
+        this.bgMusic.currentTime = 0;
+    }
+    match() {
+        this.matchSound.play();
+    }
+    victory() {
+        this.stopMusic();
+        this.victorySound.play();
+    }
+    gameOver() {
+        this.stopMusic();
+        this.gameOverSound.play();
+    }
+}
+  class Matching {
+    constructor(totalTime, cards) {
+        this.cardsArray = cards;
+        this.totalTime = totalTime;
+        this.timeRemaining = totalTime;
+        this.timer = document.getElementById('time-remaining')
+        this.ticker = document.getElementById('flips');
+        this.audioController = new AudioController();
+    }
+
+    startGame() {
+        this.totalClicks = 0;
+        this.timeRemaining = this.totalTime;
+        this.cardToCheck = null;
+        this.matchedCards = [];
+        this.busy = true;
+        setTimeout(() => {
+            this.audioController.startMusic();
+            this.shuffleCards(this.cardsArray);
+            this.countdown = this.startCountdown();
+            this.busy = false;
+        }, 500)
+        this.hideCards();
+        this.timer.innerText = this.timeRemaining;
+        this.ticker.innerText = this.totalClicks;
+    }
+    startCountdown() {
+        return setInterval(() => {
+            this.timeRemaining--;
+            this.timer.innerText = this.timeRemaining;
+            if(this.timeRemaining === 0)
+                this.gameOver();
+        }, 1000);
+    }
+    gameOver() {
+        clearInterval(this.countdown);
+        this.audioController.gameOver();
+        document.getElementById('game-over-text').classList.add('visible');
+    }
+    victory() {
+        clearInterval(this.countdown);
+        this.audioController.victory();
+        document.getElementById('victory-text').classList.add('visible');
+    }
+    hideCards() {
+        this.cardsArray.forEach(card => {
+            card.classList.remove('visible');
+            card.classList.remove('matched');
+        });
+    }
+    flipCard(card) {
+        if(this.canFlipCard(card)) {
+            this.audioController.flip();
+            this.totalClicks++;
+            this.ticker.innerText = this.totalClicks;
+            card.classList.add('visible');
+
+            if(this.cardToCheck) {
+                this.checkForCardMatch(card);
+            } else {
+                this.cardToCheck = card;
+            }
+        }
+    }
+    checkForCardMatch(card) {
+        if(this.getCardType(card) === this.getCardType(this.cardToCheck))
+            this.cardMatch(card, this.cardToCheck);
+        else 
+            this.cardMismatch(card, this.cardToCheck);
+
+        this.cardToCheck = null;
+    }
+    cardMatch(card1, card2) {
+        this.matchedCards.push(card1);
+        this.matchedCards.push(card2);
+        card1.classList.add('matched');
+        card2.classList.add('matched');
+        this.audioController.match();
+        if(this.matchedCards.length === this.cardsArray.length)
+            this.victory();
+    }
+    cardMismatch(card1, card2) {
+        this.busy = true;
+        setTimeout(() => {
+            card1.classList.remove('visible');
+            card2.classList.remove('visible');
+            this.busy = false;
+        }, 1000);
+    }
+    shuffleCards(cardsArray) { 
+        for (let i = cardsArray.length - 1; i > 0; i--) {
+            let randIndex = Math.floor(Math.random() * (i + 1));
+            cardsArray[randIndex].style.order = i;
+            cardsArray[i].style.order = randIndex;
+        }
+    }
+    getCardType(card) {
+        return card.getElementsByClassName('card-value')[0].src;
+    }
+    canFlipCard(card) {
+        return !this.busy && !this.matchedCards.includes(card) && card !== this.cardToCheck;
+    }
+}
+if (document.readyState == 'loading') {
+    document.addEventListener('DOMContentLoaded', ready);
+} else {
+    ready();
+}
+function ready() {
+    let overlays = Array.from(document.getElementsByClassName('overlay-text'));
+    let cards = Array.from(document.getElementsByClassName('card'));
+    let game = new Matching(100, cards);
+overlays.forEach(overlay => {
+        overlay.addEventListener('click', () => {
+            overlay.classList.remove('visible');
+            game.startGame();
+        });
+    });
+cards.forEach(card => {
+        card.addEventListener('click', () => {
+            game.flipCard(card);
+        });
+    });
+}</script>
+</body>
+<footer><font face="fantasy"color="white" size="4"> <p id="date"></p>
+  <script>
+  document.getElementById("date").innerHTML = Date();
+  </script>
+  </footer>
+</html>
